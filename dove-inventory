@@ -1,0 +1,20 @@
+web01 ansible_host=172.31.0.53
+web02 ansible_host=172.31.10.173
+database ansible_host=172.31.14.102
+
+[webserver]
+web01
+web02
+
+[dbsgrp]
+database
+
+[dc_ash:children]
+webserver
+dbsgrp
+
+
+[dc_ash:vars]
+ansible_user=centos
+ansible_ssh_private_key_file=./server.pem
+
