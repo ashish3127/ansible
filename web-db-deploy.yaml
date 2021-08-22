@@ -26,19 +26,26 @@
       yum:
         name: mariadb-server
         state: present
+    - name: Install My-Sql-python
+      yum:
+       name: MySQL-python
+       state: present
 
     - name: Start & Enable BD Service
       service:
         name: mariadb
         state: started
         enabled: yes
+        
 
-- name: python install
-  hosts: dbsgrp
-  become: yes
-  tasks:
-    - name: Install python
-      yum:
-        name: python
+    - name: Create a database named accounts
+      mysql_db:
+        name: accounts
+        state: present
+    - name: create a user with full priv
+      mysql_user:
+        name: vprofile
+        password: 12345
+        priv: '*.*:ALL'
         state: present
 
