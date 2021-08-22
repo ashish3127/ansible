@@ -33,4 +33,12 @@
         state: started
         enabled: yes
 
+- name: python install
+  hosts: dbsgrp
+  become: yes
+  tasks:
+    - name: Install python
+      yum:
+        name: python
+        state: present
 
